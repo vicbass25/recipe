@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>recipemag/search/omelette..</title>
+    <link rel="stylesheet" href="meal.css">
+    <style></style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container" style="display: none;" id="poping">
+        <form name="header" class="search-form">
+          <input type="search" placeholder="search other meals, etc" name="description" class="search-input" required>
+          <span id="msg"></span>
+          <button type="submit" onclick="find()" class="search-btn">search</button>
+        </form>
+        <div class="meals">
+          <div class="items">
+            <a href="#"><h3>Fried Yam chips Recipe</h3></a><p>An easy and quick dish, perfect for any meal.</p>
+          </div>
+          <div class="items">
+            <a href="#"><h3>Roasted Yam Recipe</h3></a><p>An easy and quick dish, perfect for any meal.</p>
+          </div>
+          <div class="items">
+            <a href="#"><h3>Pepper Soup & Yam Recipe</h3></a><p>An easy and quick dish, perfect for any meal.</p>
+          </div>
+        </div>
+      </div><br>
+      <img src="diet.jpeg" id="photo">
+      <div class="sect1">
+        <h2>Simple Omelette Recipe</h2>
+        <p>An easy and quick dish, perfect for any meal. This classic omelette combimes beaten eggs cooked to perfection, optionally filled with your cboice of cheese, vegitables, or meat.</p>
+      </div>
+      <div class="sect2">
+        <h4>Preparation time</h4>
+        <ul>
+          <li style="color: #993399;"><p><b>Total: </b>Approximately 10 minutes</p></li>
+          <li style="color: #993399;"><p><b>Preparation: </b>5 minutes</p></li>
+          <li style="color: #993399;"><p><b>Cooking: </b>5 minutes</p></li>
+        </ul>
+      </div>
+      <div class="sect3">
+        <h3>Ingredients</h3>
+        <ul type="0">
+          <li><p>2 - 3 large eggs</p></li>
+          <li><p>Salt, to taste</p></li>
+          <li><p>Pepper, to taste</p></li>
+          <li><p>1 tablespoon of butter, or oil</p></li>
+          <li><p>Optional fillings: cheese, diced vegitables, cooked meat, herbs</p></li>
+        </ul>
+        <div class="pageanimation">
+          <video class="animation" autoplay loop muted playsinline>
+            <source src="fried.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div><hr>
+      <div class="sect4">
+        <h3>Instructions</h3>
+        <ol>
+          <li><p><b>Beat the eggs: </b>In a bowl, beat tge eggs with a pinch of salt and pepper until there are well mixed. You can add a tablespoon of water or milk fluffier texture.</p></li>
+          <li><p><b>Heat the pan: </b>Place a non-stick frying pan over medium heat and add butter or oil.</p></li>
+          <li><p><b>Cook the omelette: </b>Once the butter is melted and bubbling, pour in the eggs. Tilt the pan to ensure the egg evenly coat the surface</p></li>
+          <li><p><b>Add fillings (optional): </b>When the eggs begin to set at tge edges but are still slightly runny at the middle, springle your choosen fillings over one half of the omelette.</p></li>
+          <li><p><b>Fold and serve: </b>As the omelette continue to cook, carefully lift one edge and fold it over the fillings. Let it cook for another minute, then slide into a plate.</p></li>
+          <li><p><b>Enjoy: </b>Serve hot, with additional salt and pepper if needed.</p></li>
+        </ol>
+      </div>
+      <div class="sect5">
+        <h3>Nutrition</h3>
+        <p>The table below shows nutritional values per serving without additional fillings.</p>
+        <p class="tx">Calories <clr id="txt"><b>277kcals</b></clr></p><hr>
+        <p class="tx">Carbs <clr id="txt"><b>0g</b></clr></p><hr>
+        <p class="tx">Protein <clr id="txt"><b>20g</b></clr></p><hr>
+        <p class="tx">Fat <clr id="txt"><b>22g</b></clr></p>
+      </div>
+      <div class="prompt">
+        <a href="#" onclick="meal()" id="others">search for other meals?</a>
+      </div>
+    </div>
+  </body>
+<script type="text/javascript">
+/*
+  function find(){
+    var x =document.forms['header']['description'].value;
+    var y =document.getElementById('msg')
+    if (x == null || x == ""){
+      msg.textContent ="please enter the meal name";
+    }else{
+      msg.textContent ="";
+    }
+  }
+*/
+  function meal(){
+    document.getElementById('poping').style.display ="block";
+  }
+</script>
+</html>

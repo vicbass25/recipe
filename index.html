@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipe Mag</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap"/>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: white;
+      font-family: "Outfit", sans-serif;
+      min-height: 100vh;
+    }
+
+    .container {
+      transition: margin-left 0.3s ease-in-out;
+    }
+
+    /* ── Sidebar (left sliding menu) ── */
+    .bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      background-color: white;
+      border-right: 1px solid gray;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 500;
+      gap: 5px;
+    }
+
+    .bar.active {
+      transform: translateX(0);
+    }
+
+    .bar ul {
+      list-style: none;
+      padding: 20px 16px;
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .bar a {
+      text-decoration: none;
+      color: #333333;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: color 0.2s;
+    }
+    .bar img{
+      width: 14px;
+      height: 14px;
+      color: #000066;
+    }
+    .bar img:hover{
+      color: #CC3300;
+    }
+    .bar a:hover {
+      color: #CC3300;
+    }
+
+    /* ── Top navigation bar ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 5px;
+      background-color: #f6f6f6;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+    }
+
+    #menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    #menu-btn img {
+      width: 25px;
+      height: 25px;
+      display: block;
+    }
+
+    #search-toggle-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    #search-toggle-btn img{
+      width: 25px;
+      height: 25px;
+      display: block;
+    }
+
+    /* Search box (pops below nav) */
+    #poping {
+      padding: 0 16px 12px;
+      background: #f9f9f9;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 10px 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      background-color: #f6f6f6;
+      border-color: #999;
+    }
+
+    .search-btn {
+      padding: 0 20px;
+      font-size: 16px;
+      background: #CC3300;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .search-btn:hover {
+      background: #b02c00;
+    }
+
+    /* ── Recipe cards ── */
+    .menu {
+      padding: 16px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .menu h3 {
+      margin: 0 0 6px 0;
+    }
+
+    .menu h3 a {
+      color: #CC3300;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .menu h3 a:hover {
+      text-decoration: underline;
+    }
+
+    .menu p {
+      margin: 0;
+      color: #000036;
+      line-height: 1.4;
+    }
+
+    /* Placeholder image styling */
+    .hphoto {
+      width: 100%;
+      overflow: hidden;
+      margin: 0;
+      max-height: 380px;
+      padding: 10px;
+    }
+    .hphoto img{
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Sidebar -->
+  <div class="bar" id="bar">
+    <ul>
+      <li><a href="index.html"><img src="home.svg" alt="Menu"> HOME</a></li>
+      <li><a href="#" onclick="meal()"><img src="search-alt.svg"> EXPLORE</a></li>
+      <li><a href="#"><img src="star.svg"> FAVORITES</a></li>
+      <li><a href="Subscribe.html"><img src="bell-ring.svg"> STAY INFORMED</a></li>
+    </ul>
+  </div>
+
+  <!-- Top nav -->
+  <div class="nav">
+    <button id="menu-btn">
+      <img src="bars-sort.svg" alt="Menu">
+    </button>
+
+    <button id="search-toggle-btn" onclick="toggleSearch()"><img src="search-alt.svg"</button>
+  </div>
+  <div class="box" style="display: none;" id="poping">
+      <form name="header" class="search-form">
+        <input 
+        type="search" 
+        placeholder="search other meals, etc" 
+        name="description" 
+        class="search-input" 
+        required
+        >
+        <button type="submit" onclick="find()" class="search-btn"></button>
+      </form>
+      <span id="msg"></span>
+    </div>
+
+  <!-- Hero / placeholder image -->
+  <div class="hphoto">
+    <img id="hero-photo" src="food.png" alt="Featured dish">
+  </div>
+
+  <!-- Recipe list -->
+  <div class="menu">
+    <h3><a href="omelette.html">Omelette Recipe</a></h3>
+    <p>An easy and quick dish, perfect for any meal. This classic...</p>
+  </div>
+
+  <div class="menu">
+    <h3><a href="#">Fried Yam Chips Recipe</a></h3>
+    <p>An easy and quick dish, perfect for any meal...</p>
+  </div>
+
+  <div class="menu">
+    <h3><a href="#">Roasted Yam Recipe</a></h3>
+    <p>An easy and quick dish, perfect for any meal...</p>
+  </div>
+
+  <div class="menu">
+    <h3><a href="#">Pepper Soup & Yam Recipe</a></h3>
+    <p>An easy and quick dish, perfect for any meal...</p>
+  </div>
+
+</div>
+
+<script>
+  // Simple toggle for sidebar
+  const menuBtn = document.getElementById('menu-btn');
+  const sidebar = document.getElementById('bar');
+
+ 
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle('active');
+  });
+  
+  document.addEventListener('click', (e) => {
+    if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && e.target !== menuBtn) {
+        sidebar.classList.remove('active');
+    }
+  });
+
+  // Toggle search box
+  function toggleSearch() {
+    const searchBox = document.getElementById('poping');
+    searchBox.style.display = "block";
+    
+    document.getElementById('search-toggle-btn').style.display ="none";
+  
+  }
+
+  // Your other functions (meal(), find()) should be defined elsewhere
+</script>
+
+</body>
+</html>
