@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/subscribe", "destination": "/subscribe.html" },
+    { "source": "/omelette", "destination": "/omelette.html" },
+    { "source": "/inform", "destination": "/inform.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
